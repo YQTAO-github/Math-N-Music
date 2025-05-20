@@ -143,11 +143,15 @@ if __name__ == '__main__':
     Lx = 3.0
     Ly = 1.0
 
+    def psi0(x, y):
+        if abs(x-Lx/2) < 0.1 and abs(y-Ly/2) < 0.1:
+            return 1.0
+        else:
+            return 0.0
 
     # 初始条件函数
-    phi = lambda x, y: np.sin(np.pi * x / Lx) * np.sin(np.pi * y / Ly)
-    psi = lambda x, y: 0.0
-
+    phi = lambda x, y: 0.0
+    psi = psi0#lambda x, y: psi0
 
     # 波速
     c = 1.0
