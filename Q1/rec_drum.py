@@ -130,7 +130,7 @@ def SolveRect_3D_plot_gif(phi, psi, Lx, Ly, c, m_max, n_max, T_max, fps=30):
         ax.set_title(f'Time: {t[i]:.2f}s')
         return ax,
     ani = FuncAnimation(fig, update, frames=len(t), interval=1000 / fps, blit=False)
-    ani.save('rectangular_drum.gif', writer='pillow', fps=fps)
+    ani.save('./Math-N-Music/Q1/rectangular_drum.gif', writer='pillow', fps=fps)
     plt.show()
 
     return ani  

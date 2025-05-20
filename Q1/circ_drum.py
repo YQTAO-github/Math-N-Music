@@ -99,10 +99,11 @@ def animate_circular_vibration(coeffs, R, duration, fps=24):
         # 绘制表面
         ax.plot_surface(X, Y, Z, cmap='coolwarm', rstride=2, cstride=2)
         ax.set_title(f"Circular Membrane (t={current_time:.2f}s)")
+        ax.set_zlim(-1.5, 1.5)
         return ax,
     
     ani = FuncAnimation(fig, update, frames=len(t), blit=False)
-    ani.save('circular_vibration.gif', writer='pillow', fps=fps)
+    ani.save('./Math-N-Music/Q1/circular_vibration.gif', writer='pillow', fps=fps)
     plt.show()
     return ani
 
