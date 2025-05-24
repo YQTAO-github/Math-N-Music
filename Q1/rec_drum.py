@@ -179,8 +179,9 @@ if __name__ == '__main__':
             return 0.0
 
     # 初始条件函数
-    phi = lambda x, y: 0.0
-    psi = psi0#lambda x, y: psi0
+    phi = lambda x, y: 10*np.sin(np.pi*y/Ly)*np.sin(np.pi*x/Lx) +9*np.sin(2*np.pi*y/Ly)*np.sin(np.pi*x/Lx) + 8*np.sin(np.pi*y/Ly)*np.sin(2*np.pi*x/Lx) + 7*np.sin(2*np.pi*y/Ly)*np.sin(2*np.pi*x/Lx) 
+     # 初始条件函数 phi(x,y)
+    psi = lambda x,y: 0.0 #lambda x, y: psi0
 
     # 波速
     c = 1.0
