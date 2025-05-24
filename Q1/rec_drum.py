@@ -9,6 +9,7 @@ from matplotlib.animation import FuncAnimation
 
 from scipy import integrate
 from mpl_toolkits.mplot3d import Axes3D
+import collections
 
 
 def SolveRect_coefficient(phi, psi, Lx, Ly, c, m, n):
@@ -135,10 +136,38 @@ def SolveRect_3D_plot_gif(phi, psi, Lx, Ly, c, m_max, n_max, T_max, fps=30):
 
     return ani  
 
-    
+def Draw_freq_domain(phi, psi, Lx, Ly, c, m_max, n_max):
+    freq_strength = collections.defaultdict(float)
+    A, B = SolveRect(phi, psi, Lx, Ly, c, m_max, n_max)
+    omega_dict = {}
+
+    for m in range(1, m_max + 1):
+        for n in range(1, n_max + 1):
+            omega = np.sqrt((m * np.pi / Lx) ** 2 + (n * np.pi / Ly) ** 2) * c
+            key = np.round(omega, 8)  # avoid float precision issues
+            strength = A[m - 1, n - 1] ** 2 + B[m - 1, n - 1] ** 2
+            freq_strength[key] += strength
+            omega_dict[(m, n)] = omega
+
+    # 排序频率
+    freqs = np.array(list(freq_strength.keys()))
+    strengths = np.array([freq_strength[f] for f in freqs])
+    idx = np.argsort(freqs)
+    freqs = freqs[idx]
+    strengths = strengths[idx]
+
+    plt.figure(figsize=(8, 4))
+    plt.stem(freqs, strengths)
+    plt.xlabel('Frequency ω')
+    plt.ylabel('Strength $A^2+B^2$')
+    plt.title('Frequency Domain Strength')
+    plt.tight_layout()
+    plt.show()
+
 # 测试
 if __name__ == '__main__':
 
+    
     # 矩形的长和宽
     Lx = 3.0
     Ly = 1.0
@@ -164,6 +193,9 @@ if __name__ == '__main__':
 
     # 时间最大值
     T_max = 2.0
+
+    # 计算频域分布
+    Draw_freq_domain(phi, psi, Lx, Ly, c, m_max, n_max)
 
     # 绘制gif图像
     SolveRect_3D_plot_gif(phi, psi, Lx, Ly, c, m_max, n_max, T_max)
