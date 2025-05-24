@@ -109,7 +109,7 @@ def SolveRect_3D_plot_gif(phi, psi, Lx, Ly, c, m_max, n_max, T_max, fps=30):
     ax.set_zlabel('Z')
     ax.set_xlim(0, Lx)
     ax.set_ylim(0, Ly)
-    ax.set_zlim(-1, 1)
+    ax.set_zlim(-Z_max, Z_max)
     ax.set_title('Rectangular Drum')
     ax.view_init(30, 30)
     # 绘制每一帧
@@ -122,7 +122,7 @@ def SolveRect_3D_plot_gif(phi, psi, Lx, Ly, c, m_max, n_max, T_max, fps=30):
         ax.set_zlabel('Z')
         ax.set_xlim(0, Lx)
         ax.set_ylim(0, Ly)
-        ax.set_zlim(-1, 1)
+        ax.set_zlim(-Z_max, Z_max)
         ax.set_title('Rectangular Drum')
         ax.view_init(30, 30)
         # 绘制当前帧
@@ -171,7 +171,7 @@ if __name__ == '__main__':
     # 矩形的长和宽
     Lx = 3.0
     Ly = 1.0
-
+    Z_max = 10.0
     def psi0(x, y):
         if abs(x-Lx/2) < 0.1 and abs(y-Ly/2) < 0.1:
             return 1.0
